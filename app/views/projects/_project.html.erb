@@ -1,0 +1,199 @@
+   
+   
+   <style type="text/css">
+     small{
+      color: red;
+       display: block;
+       margin: auto;
+     }
+     .errors{
+      width: 100%;
+      margin: auto;
+      text-align:center;
+     }
+   </style>
+
+   <%= form_with model: @project, multipart: true do |form|%>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :title, "Title" %>
+                </div>
+                <div class="input">
+                    <%=form.text_field :title%>
+                </div>
+                <div class="errors">
+                   <% @project.errors.full_messages_for(:title).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :category, "Category" %>
+                </div>
+                <div class="input">
+                    <%=form.select :category , [[ "Ui/Ux", 0], [ "Logo-design", 1], [ "Mobile", 2], [ "Web", 3]] %>
+                </div>
+                  <div class="errors">
+                   <% @project.errors.full_messages_for(:category).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :priority, "Priority" %>
+                </div>
+                <div class="input">
+                    <%=form.number_field :priority, in: 1..10 %>
+                </div>
+                  <div class="errors">
+                   <% @project.errors.full_messages_for(:priority).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :start_date, "Start date" %>
+                </div>
+                <div class="input">
+                    <%=form.date_field :start_date, :onchange => "durationCalculation(
+                    'start')"%>
+                </div>
+                   <div class="errors">
+                   <% @project.errors.full_messages_for(:start_date).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :end_date, "End date" %>
+                </div>
+                <div class="input">
+                    <%=form.date_field :end_date, :onchange => "durationCalculation(
+                    'en')" %>
+                </div>
+                   <div class="errors">
+                   <% @project.errors.full_messages_for(:end_date).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :duration %>
+                </div>
+                <div class="input">
+                    <%=form.number_field :duration, :onchange => "durationCalculation('duration')" %>
+                </div>
+                   <div class="errors">
+                   <% @project.errors.full_messages_for(:duration).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :git_url, "Git url" %>
+                </div>
+                <div class="input">
+                    <%=form.url_field :git_url %>
+                </div>
+                <div class="errors">
+                   <% @project.errors.full_messages_for(:git_url).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :live_url, "Live url" %>
+                </div>
+                <div class="input">
+                    <%=form.url_field :live_url %>
+                </div>
+                <div class="errors">
+                   <% @project.errors.full_messages_for(:live_url).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :active, "Active" %>
+                </div>
+                <div class="input">
+                    <%=form.select :active, [[ "Yes", true], [ "No", false]] %>
+                </div>
+                <div class="errors">
+                   <% @project.errors.full_messages_for(:Active).each do |message| %>
+                       <small style="color: red"><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="label">
+                    <%=form.label :description, "Description" %>
+                </div>
+                <div class="input">
+                    <%=form.text_area :description %>
+                </div>
+                <div class="errors">
+                   <% @project.errors.full_messages_for(:description).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="label">
+                    <%=form.label :challenges, "Challenges" %>
+                </div>
+                <div class="input">
+                    <%=form.text_area :challenges %>
+                </div>
+                <div class="errors">
+                   <% @project.errors.full_messages_for(:challenges).each do |message| %>
+                       <small><%= message %></small>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+
+
+          <%= form.submit %>
+        
+        <%end%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

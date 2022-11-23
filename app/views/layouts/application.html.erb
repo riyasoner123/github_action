@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+  <html> 
+   <head> <!-- Warning !! ensure that "stylesheet_pack_tag" is used, line below -->
+    <%= csp_meta_tag %>
+    <%= csrf_meta_tags %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/footer' %>
+    <%= render 'layouts/navbar'%>
+    <%= stylesheet_link_tag 'form' %>
+    <%= stylesheet_link_tag 'navbar'%>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Project Management </title>
+
+  </head>
+  <body>
+  <p id="notice" style="display: none;" > <%= notice %></p>
+     <p id="alert"  style="display: none;"   ><%= alert %></p>
+  <%if notice %>
+  <script type="text/javascript">
+      let data=document.getElementById("notice")
+     alert(data.innerHTML)
+  </script>
+  <%end%>
+    <%if alert %>
+  <script type="text/javascript">
+      let data=document.getElementById("alert")
+     alert(data.innerHTML)
+  </script>
+  <%end%>
+     
+    <%= yield %>
+   
+
+    <script type="text/javascript">
+    
+    function format(value) {
+    
+    if (value < 10)
+        return "0"+value
+    else
+        return value
+}
+
+function durationCalculation(data) {
+    let start = document.getElementById("project_start_date")
+    let end = document.getElementById("project_end_date")
+    let duration = document.getElementById("project_duration")
+    let daysInMili = duration.value * 24 * 60 * 60 * 1000;
+    if (data == "start") {
+        let s1 = new Date(start.value).getTime();
+        let newDate = new Date((s1 + daysInMili));
+        if (!end.value) {
+            end.value = newDate.getFullYear() + "-" + format((newDate.getMonth() + 1)) + "-" + format(newDate.getDate())
+        } else {
+            let s2 = new Date(end.value).getTime()
+            let difference = s2 - s1
+            duration.value = parseInt(difference / (24 * 60 * 60 * 1000));
+        }
+    } else if (data == "en") {
+        let s1 = new Date(end.value).getTime();
+        let newDate = new Date((s1 - daysInMili));
+        if (!start.value) {
+            start.value = newDate.getFullYear() + "-" + format((newDate.getMonth() + 1)) + "-" + format(newDate.getDate())
+        } else {
+
+            let difference = new Date(end.value).getTime() - new Date(start.value).getTime()
+            duration.value = parseInt(difference / (24 * 60 * 60 * 1000));
+        }
+    } else {
+        if (start.value) {
+            let s1 = new Date(start.value).getTime();
+            let newDate = new Date((s1 + daysInMili));
+            end.value = newDate.getFullYear() + "-" + format((newDate.getMonth() + 1)) + "-" + format(newDate.getDate())
+        } else {
+            alert("Plese choose start date")
+        }
+    }
+
+    //   start.value= new Date().getFullYear()+"-0"+(new Date().getMonth()+1)+"-"+new Date().getDate()
+    // alert(start.value)
+    //  let date1=new Date(data).getTime()
+    //  let date2=new Date().getTime()
+    //  let difference=date2-date1
+    //  let days=parseInt(difference/(24*60*60*1000))
+
+
+}
+    </script>
+   </body>
+
+</html>

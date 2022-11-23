@@ -1,0 +1,191 @@
+<style type="text/css">
+    
+.editButton {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.editButton:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.editButton:active {
+  transform: scale(0.95);
+}
+.updateButton {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+ background: linear-gradient(
+    to left,
+    hsl(340deg 100% 16%) 0%,
+    hsl(340deg 100% 32%) 8%,
+    hsl(340deg 100% 32%) 92%,
+    hsl(340deg 100% 16%) 100%
+  );
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.updateButton:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.updateButton:active {
+  transform: scale(0.95);
+}
+
+</style>
+<div class="createDiv">
+   <%= form_with model: @project, multipart: true do |form|%>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :title, "Title"%>
+                </div>
+                <div class="input">
+                    <%=form.text_field :title, :readonly => true%>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :category, "Category" %>
+                </div>
+                <div class="input">
+                    <%=form.select :category , [[ "Ui/Ux", 0], [ "Logo-design", 1], [ "Mobile", 2], [ "Web", 3]], :readonly => true %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :priority, "Priority" %>
+                </div>
+                <div class="input">
+                    <%=form.number_field :priority, in: 1..10, :readonly => true %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :start_date, "Start date" %>
+                </div>
+                <div class="input">
+                    <%=form.date_field :start_date, :readonly => true%>
+                </div>
+                   
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :end_date, "End date" %>
+                </div>
+                <div class="input">
+                    <%=form.date_field :end_date, :readonly => true %>
+                </div>
+                   
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :duration %>
+                </div>
+                <div class="input">
+                    <%=form.number_field :duration, :readonly => true %>
+                </div>
+                   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :git_url, "Git url" %>
+                </div>
+                <div class="input">
+                    <%=form.url_field :git_url, :readonly => true %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :live_url, "Live url" %>
+                </div>
+                <div class="input">
+                    <%=form.url_field :live_url, :readonly => true %>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="label">
+                    <%=form.label :active, "Active" %>
+                </div>
+                <div class="input">
+                    <%=form.select :active, [[ "Yes", true], [ "No", false]], :readonly => true %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="label">
+                    <%=form.label :description, "Description" %>
+                </div>
+                <div class="input">
+                    <%=form.text_area :description, :readonly => true %>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="label">
+                    <%=form.label :challenges, "Challenges" %>
+                </div>
+                <div class="input">
+                    <%=form.text_area :challenges %>
+                </div>
+            </div>
+        </div>
+        <%end%>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <%= link_to "Click here for edit", edit_project_path, :class => "editButton" %>
+            </div>
+            <div class="col-md-4 text-center">
+               <%= link_to "Destroy", project_path(@project),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, :class => "updateButton" %>
+        </div>
+
+</div>      
