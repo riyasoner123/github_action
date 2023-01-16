@@ -23,7 +23,7 @@ pipeline {
     }
   }
   stages{
-  	stage("Checkout"){
+    stage("Checkout"){
       steps{
         git url: 'https://github.com/shailendra153/demo', branch: 'master'
       }
@@ -50,11 +50,11 @@ pipeline {
       }
     }
   }
-  // post{
-  //   always{
-  //     container('docker'){
-  //       sh 'docker logout'
-  //     }
-  //   }
-  // }
+  post{
+    always{
+      container('docker'){
+        sh 'docker logout'
+      }
+    }
+  }
 }
